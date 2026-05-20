@@ -1,8 +1,14 @@
+import { auth } from "@/lib/auth";
 import { S3 } from "@/lib/S3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function DELETE(request: Request) {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
     try {
         const body = await request.json();
         const key = body.key;

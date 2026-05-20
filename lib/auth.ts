@@ -3,6 +3,7 @@ import { emailOTP } from "better-auth/plugins"
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./db";
 import { resend } from "./resend";
+import { admin } from "better-auth/plugins/admin";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -25,5 +26,6 @@ export const auth = betterAuth({
         });
       }
     }),
+    admin()
   ]
 });

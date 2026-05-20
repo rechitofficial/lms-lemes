@@ -178,7 +178,7 @@ export default function CourseCreationPage() {
                                         <FieldLabel htmlFor="form-rhf-demo-fileKey">
                                             File Key
                                         </FieldLabel>
-                                        <Uploader value={field.value} onChange={field.onChange} />
+                                        <Uploader fileTypeAccepted="image" value={field.value} onChange={field.onChange} />
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
                                         )}

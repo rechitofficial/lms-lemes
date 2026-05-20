@@ -1,3 +1,4 @@
+import { description } from "@/components/sidebar/chart-area-interactive";
 import { z } from "zod";
 
 export const courseLevels = [
@@ -71,4 +72,37 @@ export const courseSchema = z.object({
         .default("DRAFT"),
 });
 
+export const chapterSchema = z.object({
+    title: z
+        .string()
+        .min(3, "Title must be at least 3 characters")
+        .max(100, "Title must be less than 100 characters"),
+    courseId: z.uuid("Invalid course ID"),
+});
+
+export const lessonSchema = z.object({
+    title: z
+        .string()
+        .min(3, "Title must be at least 3 characters")
+        .max(100, "Title must be less than 100 characters"),
+    chapterId: z.uuid("Invalid chapter ID"),
+    courseId: z.uuid("Invalid course ID"),
+    description: z
+        .string()
+        .min(3, "Description must be at least 3 characters")
+        .max(2500, "Description must be less than 2500 characters")
+        .optional(),
+    thumbnailKey: z
+        .string()
+        .optional(),
+    videoKey: z
+        .string()
+        .optional(),
+    content: z
+        .string()
+        .optional(),
+});
+
 export type CourseSchemaType = z.infer<typeof courseSchema>;
+export type ChapterSchemaType = z.infer<typeof chapterSchema>;
+export type LessonSchemaType = z.infer<typeof lessonSchema>;

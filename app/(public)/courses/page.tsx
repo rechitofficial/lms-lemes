@@ -3,6 +3,8 @@ import { Public } from "@/lib/generated/prisma/runtime/client";
 import { PublicCourseCard, PublicCourseCardSkeleton } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default function PublicCoursesRoute() {
     return (
         <div className="px-4 md:px-6 lg:px-8 py-10">

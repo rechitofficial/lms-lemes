@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/db";
 
 export async function getAllCourses() {
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate network delay
     const data = await prisma.course.findMany({
         where: {
             status: "PUBLISHED",

@@ -6,7 +6,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3 } from "@/lib/S3Client";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 
-export const fileUploadSchema = z.object({
+const fileUploadSchema = z.object({
     fileName: z.string().min(1, "File name is required"),
     contentType: z.string().min(1, "Content type is required"),
     size: z.number().min(1, "File is required"),

@@ -1,6 +1,6 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form"
+import { Controller, Resolver, useForm } from "react-hook-form"
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowLeft, Loader2, PlusIcon, SparkleIcon } from "lucide-react";
 import { courseCategories, courseLevels, courseSchema, CourseSchemaType, courseStatuses } from "@/lib/zod-schema";
@@ -29,7 +29,7 @@ export function EditCourseForm({ data }: iAppProps) {
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
     const form = useForm<CourseSchemaType>({
-        resolver: zodResolver(courseSchema),
+        resolver: zodResolver(courseSchema) as Resolver<CourseSchemaType>,
         defaultValues: {
             title: data.title,
             description: data.description,
@@ -248,13 +248,13 @@ export function EditCourseForm({ data }: iAppProps) {
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>
                                 <FieldLabel htmlFor="form-rhf-demo-price">
-                                    Price (in USD)
+                                    Price (in IDR)
                                 </FieldLabel>
                                 <Input
                                     {...field}
                                     id="form-rhf-demo-price"
                                     aria-invalid={fieldState.invalid}
-                                    placeholder="Enter the price of your course in USD"
+                                    placeholder="Enter the price of your course in IDR"
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (
@@ -294,7 +294,7 @@ export function EditCourseForm({ data }: iAppProps) {
                 <Button type="submit" className="self-end" disabled={isPending}>
                     {isPending ? (
                         <>
-                            "Updating..." <Loader2 className="animate-spin ml-1" />
+                            Updating... <Loader2 className="animate-spin ml-1" />
                         </>
                     ) : (
                         <>

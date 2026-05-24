@@ -3,7 +3,7 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Loader2, PlusIcon, SparkleIcon } from "lucide-react";
-import { Controller, useForm } from "react-hook-form"
+import { Controller, Resolver, useForm } from "react-hook-form"
 import Link from "next/link";
 import { courseCategories, courseLevels, courseSchema, CourseSchemaType, courseStatuses } from "@/lib/zod-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ export default function CourseCreationPage() {
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
     const form = useForm<CourseSchemaType>({
-        resolver: zodResolver(courseSchema),
+        resolver: zodResolver(courseSchema) as Resolver<CourseSchemaType>,
         defaultValues: {
             title: "",
             description: "",
@@ -265,13 +265,13 @@ export default function CourseCreationPage() {
                                     render={({ field, fieldState }) => (
                                         <Field data-invalid={fieldState.invalid}>
                                             <FieldLabel htmlFor="form-rhf-demo-price">
-                                                Price (in USD)
+                                                Price (in IDR)
                                             </FieldLabel>
                                             <Input
                                                 {...field}
                                                 id="form-rhf-demo-price"
                                                 aria-invalid={fieldState.invalid}
-                                                placeholder="Enter the price of your course in USD"
+                                                placeholder="Enter the price of your course in IDR"
                                                 autoComplete="off"
                                             />
                                             {fieldState.invalid && (
@@ -311,7 +311,7 @@ export default function CourseCreationPage() {
                             <Button type="submit" className="self-end" disabled={isPending}>
                                 {isPending ? (
                                     <>
-                                        "Creating..." <Loader2 className="animate-spin ml-1" />
+                                        Creating... <Loader2 className="animate-spin ml-1" />
                                     </>
                                 ) : (
                                     <>

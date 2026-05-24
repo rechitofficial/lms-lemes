@@ -1,18 +1,25 @@
 import { getIndividualCourse } from "@/app/data/course/get-course";
 import { RenderDescription } from "@/components/rich-text-editor/RenderDescription";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
 import { Book, ChartBar, CheckIcon, ChevronDown, Clock3, GraduationCap, Play, School } from "lucide-react";
 import Image from "next/image";
+import { enrollInCourse } from "./action";
+import { redirect } from "next/navigation";
+import { checkIfCourseEnrolled } from "@/app/data/user/user-is-enrolled";
+import Link from "next/link";
+import { EnrollmentStatus } from "@/lib/generated/prisma";
+import EnrollmentButton from "../_components/EnrollmentButton";
 
 type Params = Promise<{ slug: string }>;
 
 export default async function SlugPage({ params }: { params: Params }) {
     const { slug } = await params;
     const course = await getIndividualCourse(slug);
+    const isEnrolled = await checkIfCourseEnrolled(course.id);
     return (
         <>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-5">
@@ -120,10 +127,11 @@ export default async function SlugPage({ params }: { params: Params }) {
                                             <p className="text-sm font-medium text-muted-foreground">
                                                 Course Price
                                             </p>
+                                            {/* TODO: add currency formatting for other currencies */}
                                             <h2 className="mt-1 text-3xl font-bold tracking-tight">
-                                                {new Intl.NumberFormat("en-US", {
+                                                {new Intl.NumberFormat("id-ID", {
                                                     style: "currency",
-                                                    currency: "USD",
+                                                    currency: "IDR",
                                                 }).format(course.price)}
                                             </h2>
                                         </div>
@@ -224,12 +232,22 @@ export default async function SlugPage({ params }: { params: Params }) {
 
                                     {/* CTA */}
                                     <div className="space-y-3">
-                                        <Button
-                                            size="lg"
-                                            className="h-12 w-full rounded-xl text-base font-semibold shadow-lg transition-all hover:scale-[1.02]"
-                                        >
-                                            Enroll Now
-                                        </Button>
+                                        {/* <form action={async () => { (only for test)
+                                            "use server"; 
+                                            const response = await enrollInCourse(course.id);
+                                            if (response.status === "success" && response.data) {
+                                                redirect(response.data.redirectUrl)
+                                            }
+                                        }}> */}
+
+                                        {isEnrolled ? (
+                                            <Link className={buttonVariants({ className: "w-full" })} href={`/cusomer-dashboard`}>
+                                                Watch Now
+                                            </Link>
+                                        ) : (
+                                            <EnrollmentButton courseId={course.id} />
+                                        )}
+                                        {/* </form> */}
 
                                         <p className="text-center text-xs text-muted-foreground">
                                             7-day money-back guarantee

@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db";
 import { APIResponse } from "@/lib/types";
 import { lessonSchema, LessonSchemaType } from "@/lib/zod-schema";
 
-export async function UpdateLesson(values: LessonSchemaType, lessonId: string): Promise<APIResponse> {
+export async function UpdateLesson(values: LessonSchemaType, lessonId: string): Promise<APIResponse<void>> {
     await requireAdmin();
 
     try {
@@ -19,13 +19,15 @@ export async function UpdateLesson(values: LessonSchemaType, lessonId: string): 
             };
         }
 
+        const data = result.data;
+
         await prisma.lesson.update({
             where: { id: lessonId },
             data: {
-                title: values.title,
-                content: values.content,
-                videoKey: values.videoKey,
-                thumbnailKey: values.thumbnailKey,
+                title: data.title,
+                description: data.description,
+                videoKey: data.videoKey,
+                thumbnailKey: data.thumbnailKey,
             },
         });
         return {

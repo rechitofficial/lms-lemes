@@ -22,6 +22,7 @@ export const courseCategories = [
     "Music",
     "Personal Development",
     "Health & Fitness",
+    "Other",
 ] as const;
 
 export const courseSchema = z.object({

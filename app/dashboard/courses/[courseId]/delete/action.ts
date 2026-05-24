@@ -2,9 +2,10 @@
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { prisma } from "@/lib/db";
+import { APIResponse } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 
-export async function deleteCourse(courseId: string): Promise<APIResponse> {
+export async function deleteCourse(courseId: string): Promise<APIResponse<void>> {
     await requireAdmin();
     
     try {

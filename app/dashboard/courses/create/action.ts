@@ -7,6 +7,31 @@ import { APIResponse } from "@/lib/types";
 import { courseSchema, CourseSchemaType } from "@/lib/zod-schema";
 import { headers } from "next/headers";
 
+function getErrorMessage(error: unknown) {
+    // console.log("availablenya:", Object.keys(PrismaAll));
+    // console.error(" masuk getErrorMessage:", error, "valuenya:", error instanceof Prisma.PrismaClientKnownRequestError), "end";
+    if (
+        typeof error === "object" &&
+        error !== null &&
+        "code" in error
+    ) {
+        const code = (error as { code: string }).code;
+
+        if (code === "P2002") {
+            const meta = (error as any).meta;
+            // your prisma version stores it here
+            const fields = meta?.driverAdapterError?.cause?.constraint?.fields;
+            const field = Array.isArray(fields) ? fields[0] : "Field";
+            return `${field} already exists`;
+        }
+
+        if (code === "P2003") return "Invalid relation data";
+        if (code === "P2025") return "Record not found";
+    }
+
+    return "An error occurred while creating the course";
+}
+
 export async function CreateCourse(input: CourseSchemaType): Promise<APIResponse<null>> {
     await requireAdmin();
     try {
@@ -44,9 +69,11 @@ export async function CreateCourse(input: CourseSchemaType): Promise<APIResponse
     } catch (error) {
         console.error("CREATE COURSE ERROR:", error);
 
+        const errorMessage = getErrorMessage(error);
+
         return {
             status: "error",
-            message: "An error occurred while creating the course",
+            message: errorMessage,
         };
     }
 }

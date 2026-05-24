@@ -7,7 +7,7 @@ import { chapterSchema, ChapterSchemaType, courseSchema, CourseSchemaType, lesso
 import { revalidatePath } from "next/cache";
 import { title } from "process";
 
-export async function editCourse(data: CourseSchemaType, courseId: string): Promise<APIResponse> {
+export async function editCourse(data: CourseSchemaType, courseId: string): Promise<APIResponse<void>> {
     const user = await requireAdmin();
 
     try {
@@ -43,7 +43,7 @@ export async function editCourse(data: CourseSchemaType, courseId: string): Prom
 
 }
 
-export async function reorderLessons(courseId: string, chapterId: string, lessons: { id: string; position: number }[]): Promise<APIResponse> {
+export async function reorderLessons(courseId: string, chapterId: string, lessons: { id: string; position: number }[]): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         if (!lessons || lessons.length === 0) {
@@ -79,7 +79,7 @@ export async function reorderLessons(courseId: string, chapterId: string, lesson
     }
 }
 
-export async function reorderChapters(courseId: string, chapters: { id: string; position: number }[]): Promise<APIResponse> {
+export async function reorderChapters(courseId: string, chapters: { id: string; position: number }[]): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         if (!chapters || chapters.length === 0) {
@@ -115,7 +115,7 @@ export async function reorderChapters(courseId: string, chapters: { id: string; 
     }
 }
 
-export async function createChapter(data: ChapterSchemaType): Promise<APIResponse> {
+export async function createChapter(data: ChapterSchemaType): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         const result = chapterSchema.safeParse(data);
@@ -162,7 +162,7 @@ export async function createChapter(data: ChapterSchemaType): Promise<APIRespons
     }
 }
 
-export async function createLesson(data: LessonSchemaType): Promise<APIResponse> {
+export async function createLesson(data: LessonSchemaType): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         const result = lessonSchema.safeParse(data);
@@ -213,7 +213,7 @@ export async function createLesson(data: LessonSchemaType): Promise<APIResponse>
     }
 }
 
-export async function deleteLesson(chapterId: string, courseId: string, lessonId: string): Promise<APIResponse> {
+export async function deleteLesson(chapterId: string, courseId: string, lessonId: string): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         // get all the lessons in the chapter to find the position of the lesson to be deleted
@@ -304,7 +304,7 @@ export async function deleteLesson(chapterId: string, courseId: string, lessonId
     }
 }
 
-export async function deleteChapter(chapterId: string, courseId: string): Promise<APIResponse> {
+export async function deleteChapter(chapterId: string, courseId: string): Promise<APIResponse<void>> {
     await requireAdmin();
     try {
         // get all the chapters in the course to find the position of the chapter to be deleted

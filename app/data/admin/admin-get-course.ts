@@ -24,6 +24,9 @@ export async function adminGetCourse(courseId: string) {
             fileKey: true,
             slug: true,
             chapter: {
+                orderBy: {
+                    position: "asc"
+                },
                 select: {
                     id: true,
                     title: true,
@@ -31,6 +34,9 @@ export async function adminGetCourse(courseId: string) {
                     createdAt: true,
                     updatedAt: true,
                     lesson: {
+                        orderBy: {
+                            position: "asc"
+                        },
                         select: {
                             id: true,
                             title: true,

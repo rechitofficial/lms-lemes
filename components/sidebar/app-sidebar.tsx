@@ -42,30 +42,31 @@ const data = {
         />
       ),
     },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: (
-        <ChartBarIcon
-        />
-      ),
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: (
-        <FolderIcon
-        />
-      ),
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: (
-        <UsersIcon
-        />
-      ),
-    },
+    // TODO: implement analytics and projects pages in the future
+    // {
+    //   title: "Analytics",
+    //   url: "#",
+    //   icon: (
+    //     <ChartBarIcon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Projects",
+    //   url: "#",
+    //   icon: (
+    //     <FolderIcon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Team",
+    //   url: "#",
+    //   icon: (
+    //     <UsersIcon
+    //     />
+    //   ),
+    // },
   ],
   navClouds: [
     {
@@ -126,14 +127,6 @@ const data = {
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-    },
-    {
       title: "Get Help",
       url: "#",
       icon: (
@@ -141,14 +134,23 @@ const data = {
         />
       ),
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
-    },
+    // TODO: Implement settings and search features
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: (
+    //     <Settings2Icon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Search",
+    //   url: "#",
+    //   icon: (
+    //     <SearchIcon
+    //     />
+    //   ),
+    // },
   ],
 }
 

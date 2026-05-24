@@ -12,7 +12,9 @@ const navigationItems = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
     { name: "Dashboard", href: "/dashboard" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "https://mail.google.com/mail/?view=cm&fs=1&to=rechit.official@gmail.com&su=Contact&body=Hi%2C%20I%20would%20like%20to%20contact%20you." },
+    // TODO: for now contact link will be a mailto link, change this to a contact page in the future
+    // { name: "Contact", href: "/contact" },
 ]
 
 export function Navbar() {

@@ -88,7 +88,12 @@ export function AdminCourseCard({ data }: iAppProps) {
                         <span className="font-medium text-foreground">
                             Price:
                         </span>{" "}
-                        ${data.price}
+                        {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                        }).format(data.price)}
                     </p>
                 </div>
 

@@ -251,6 +251,7 @@ export function Uploader({ value, onChange, fileTypeAccepted }: iAppProps) {
         }
 
         if (fileState.error) {
+            console.error("[UPLOAD_ERROR]", fileState.error);
             return <RenderErrorState />;
         }
 

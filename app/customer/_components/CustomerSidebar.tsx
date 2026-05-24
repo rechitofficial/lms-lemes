@@ -94,29 +94,30 @@ const data = {
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-    },
-    {
       title: "Get Help",
-      url: "#",
+      url: "https://mail.google.com/mail/?view=cm&fs=1&to=rechit.official@gmail.com&su=Get%20Help&body=Hi%2C%20I%20need%20help%20regarding%20your%20platform.",
       icon: (
         <CircleHelpIcon
         />
       ),
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
-      ),
-    },
+    // TODO: Implement settings and search features
+    // {
+    //   title: "Settings",
+    //   url: "#",
+    //   icon: (
+    //     <Settings2Icon
+    //     />
+    //   ),
+    // },
+    // {
+    //   title: "Search",
+    //   url: "#",
+    //   icon: (
+    //     <SearchIcon
+    //     />
+    //   ),
+    // },
   ],
 }
 

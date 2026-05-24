@@ -77,14 +77,15 @@ export function UserDropdown({ name, email, image }: iAppProps) {
                             Courses
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    {/* TODO: Implement billing and notifications features */}
+                    {/* <DropdownMenuItem>
                         <CreditCardIcon className="mr-2" />
                         Billing
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         <BellIcon className="mr-2" />
                         Notifications
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>

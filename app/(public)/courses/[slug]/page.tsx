@@ -132,6 +132,8 @@ export default async function SlugPage({ params }: { params: Params }) {
                                                 {new Intl.NumberFormat("id-ID", {
                                                     style: "currency",
                                                     currency: "IDR",
+                                                    minimumFractionDigits: 0,
+                                                    maximumFractionDigits: 0,
                                                 }).format(course.price)}
                                             </h2>
                                         </div>

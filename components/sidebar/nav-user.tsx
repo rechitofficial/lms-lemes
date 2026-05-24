@@ -99,7 +99,8 @@ export function NavUser() {
                   Courses
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              {/* TODO: Implement billing and notifications features */}
+              {/* <DropdownMenuItem>
                 <CreditCardIcon
                 />
                 Billing
@@ -108,7 +109,7 @@ export function NavUser() {
                 <BellIcon
                 />
                 Notifications
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>

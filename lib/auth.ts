@@ -19,7 +19,7 @@ export const auth = betterAuth({
     emailOTP({
       async sendVerificationOTP({ email, otp }) {
         await resend.emails.send({
-          from: 'LMS <onboarding@resend.dev>',
+          from: process.env.EMAIL_FROM || "LMS <no-reply@rech-it.com>",
           to: [email],
           subject: 'LMS - Verify Your Email',
           html: `<p>Your OTP code is: <strong>${otp}</strong></p><p>This code will expire in 10 minutes.</p>`,

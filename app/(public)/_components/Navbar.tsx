@@ -8,17 +8,20 @@ import { authClient } from "@/lib/auth-client";
 import { buttonVariants } from "@/components/ui/button";
 import { UserDropdown } from "./UserDropdown";
 
-const navigationItems = [
-    { name: "Home", href: "/" },
-    { name: "Courses", href: "/courses" },
-    { name: "Dashboard", href: "/dashboard" },
-    { name: "Contact", href: "https://mail.google.com/mail/?view=cm&fs=1&to=rechit.official@gmail.com&su=Contact&body=Hi%2C%20I%20would%20like%20to%20contact%20you." },
-    // TODO: for now contact link will be a mailto link, change this to a contact page in the future
-    // { name: "Contact", href: "/contact" },
-]
-
 export function Navbar() {
     const { data: session, isPending } = authClient.useSession();
+    const role = session?.user.role
+    const dashboardHref = role === "admin" ? "/dashboard" : "/customer";
+
+    const navigationItems = [
+        { name: "Home", href: "/" },
+        { name: "Courses", href: "/courses" },
+        { name: "Dashboard", href: dashboardHref },
+        { name: "Contact", href: "https://mail.google.com/mail/?view=cm&fs=1&to=rechit.official@gmail.com&su=Contact&body=Hi%2C%20I%20would%20like%20to%20contact%20you." },
+        // TODO: for now contact link will be a mailto link, change this to a contact page in the future
+        // { name: "Contact", href: "/contact" },
+    ]
+
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-[backdrop-filter]:bg-background/60">
             <div className="container flex min-h-16 items-center mx-auto px-4 md:px-6 lg:px-8">

@@ -29,6 +29,9 @@ export function NavUser() {
   const { isMobile } = useSidebar();
   const { data: session, isPending } = authClient.useSession();
   const handleSignOut = useSignOut();
+  const role = session?.user.role
+  const dashboardHref = role === "admin" ? "/dashboard" : "/customer";
+  const coursesHref = role === "admin" ? "/dashboard/courses" : "/courses";
 
   if (isPending || !session) {
     return null
@@ -82,19 +85,19 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <CircleUserRoundIcon
                 />
                 Account
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem>
-                <Link href="/dashboard" className="flex items-center w-full">
+                <Link href={dashboardHref} className="flex items-center w-full">
                   <LayoutDashboardIcon className="mr-2" />
                   Dashboard
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/dashboard/courses" className="flex items-center w-full">
+                <Link href={coursesHref} className="flex items-center w-full">
                   <Tv2 className="mr-2" />
                   Courses
                 </Link>

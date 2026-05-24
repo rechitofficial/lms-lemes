@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { UserRole } from "@/lib/generated/prisma";
 
 export const requireAdmin = cache(async () => {
     const session = await auth.api.getSession({
@@ -14,7 +15,7 @@ export const requireAdmin = cache(async () => {
         return redirect("/login");
     }
 
-    if (session.user.role !== "admin") {
+    if (session.user.role !== UserRole.admin) {
         return redirect("/not-admin");
     }
 
@@ -30,7 +31,7 @@ export const requireAdmin = cache(async () => {
 //         return redirect("/login");
 //     }
 
-//     if (session.user.role !== "admin") {
+//     if (session.user.role !== UserRole.admin) {
 //         return redirect("/not-admin");
 //     }
 

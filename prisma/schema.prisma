@@ -33,7 +33,7 @@ model User {
   paymentProvider   String?
   paymentCustomerId String?
 
-  role       String?
+  role       UserRole  @default(user)
   banned     Boolean?  @default(false)
   banReason  String?
   banExpires DateTime?
@@ -200,4 +200,9 @@ model LessonProgress {
   lessonId String
 
   @@unique([userId, lessonId])
+}
+
+enum UserRole {
+  user
+  admin
 }

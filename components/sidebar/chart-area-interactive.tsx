@@ -48,7 +48,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 interface ChartAreaInteractiveProps {
-  data: {date: string, enrollments: number}[];
+  data: { date: string, enrollments: number }[];
 }
 
 export function ChartAreaInteractive({ data }: ChartAreaInteractiveProps) {
@@ -134,7 +134,8 @@ export function ChartAreaInteractive({ data }: ChartAreaInteractiveProps) {
                 const date = new Date(value);
                 return date.toLocaleDateString("id-ID", { month: "short", day: "numeric" });
               }} />
-              <Bar dataKey="enrollments" fill="var(--color-enrollments)" />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Bar dataKey="enrollments" fill="var(--color-enrollments)" />
           </BarChart>
 
         </ChartContainer>

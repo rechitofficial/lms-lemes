@@ -40,6 +40,10 @@ interface iAppProps {
 
 export function UserDropdown({ name, email, image }: iAppProps) {
     const handleSignOut = useSignOut();
+    const { data: session } = authClient.useSession();
+    const role = session?.user.role
+    const dashboardHref = role === "admin" ? "/dashboard" : "/customer";
+    const coursesHref = role === "admin" ? "/dashboard/courses" : "/courses";
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -59,20 +63,20 @@ export function UserDropdown({ name, email, image }: iAppProps) {
                         <span>{name}</span>
                         <span className="text-xs text-muted-foreground truncate">{email}</span>
                     </DropdownMenuLabel>
-                    <DropdownMenuItem>
+                    {/* <DropdownMenuItem>
                         <Link href="/account" className="flex items-center w-full">
                             <BadgeCheckIcon className="mr-2" />
                             Account
                         </Link>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                     <DropdownMenuItem>
-                        <Link href="/dashboard" className="flex items-center w-full">
+                        <Link href={dashboardHref} className="flex items-center w-full">
                             <LayoutDashboardIcon className="mr-2" />
                             Dashboard
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        <Link href="/dashboard/courses" className="flex items-center w-full">
+                        <Link href={coursesHref} className="flex items-center w-full">
                             <BookOpen className="mr-2" />
                             Courses
                         </Link>
